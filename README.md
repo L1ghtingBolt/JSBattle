@@ -12,5 +12,6 @@ Do
 ## TODOS
 [x] Make it work.
 [x] Make it look good.
-[ ] Get 20 challenges.
+[ ] Put levels on a js exporting or json file, for better cleaner code.
+[ ] Get 20 challenges. 8/20
 [ ] Get 50 challenges.
