@@ -1,0 +1,25 @@
+:root {
+    --HeadingFs: 3rem;
+    --accent: #5CFF6D;
+    --complementary: #FF5C91;
+    --hover: #36b843;
+}
+
+@font-face {
+    font-family: Cascadia;
+    src: url('./assets/fonts/CascadiaCodePL.woff2');
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font: 2em sans-serif;
+    display: flex;
+    margin: 0;
+    overflow-x: hidden;
+    font-family: Cascadia;
+    background-color: #333;
+    color: #eee;
+}
