@@ -9,9 +9,6 @@ let defaultCode = `function solution(a,b) {
     
     let code = ref(defaultCode);
 
-
-
-
     let levels = ref([
         {
             name:"Return 'a' times 'b'.",
@@ -75,6 +72,70 @@ let defaultCode = `function solution(a,b) {
                 '132',
                 '81',
                 '36',
+            ]
+        },
+        {
+            name:"Create a function that generates a list of the even numbers with a maximum.",
+            params: 'max',
+            tests: [
+                '10',
+                '4',
+                '8',
+                '5',
+            ],
+            correctTests: [
+                '2,4,8,10',
+                '2,4',
+                '2,4,8',
+                '2,4',
+            ]
+        },
+        {
+            name:"Create a function that filters out negative numbers.",
+            params: '...numbers',
+            tests: [
+                '10, -5, 5, 7',
+                '90, 10, -24, 234',
+                '123, -432, 567, -890',
+                '5',
+            ],
+            correctTests: [
+                '10, 5, 7',
+                '90, 10, 234',
+                '123, 567',
+                '5',
+            ]
+        },
+        {
+            name:"Remove the spaces, commas and '-' found in a string.",
+            params: 'string',
+            tests: [
+                '"The quick-brown, fox"',
+                '"Jumps quickly,tnt"',
+                '"This_String_Should_Be_The_Same"',
+                '"Potatoes, chips, marshmallows."',
+            ],
+            correctTests: [
+                '"Thequickbrownfox"',
+                '"Jumpsquicklytnt"',
+                '"This_String_Should_Be_The_Same"',
+                '"Potatoeschipmarshmallows."',
+            ]
+        },
+        {
+            name:"{HARD} Return the number of vowels on string.",
+            params: 'string',
+            tests: [
+                '"The quick-brown, fox"',
+                '"Jumps quickly,tnt"',
+                '"How many?"',
+                '"Potatoes, chips, marshmallows."',
+            ],
+            correctTests: [
+                '5',
+                '3',
+                '2',
+                '8',
             ]
         },
     ])
