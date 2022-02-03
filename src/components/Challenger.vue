@@ -2,143 +2,14 @@
     import Nav from './Nav.vue';
     import {ref} from 'vue';
     import MonacoEditor from 'vue-monaco-cdn'
-    
+    import {levels} from '../utils/challenges'
 let defaultCode = `function solution(a,b) {
     return 
 }`
     
     let code = ref(defaultCode);
 
-    let levels = ref([
-        {
-            name:"Return 'a' times 'b'.",
-            params: 'a,b',
-            tests: [
-                '9, 8',
-                '10, 24',
-                '10, 10',
-                '5, 7',
-            ],
-            correctTests: [
-                '72',
-                '240',
-                '100',
-                '35',
-            ]
-        },
-        {
-            name:"Make a OR function",
-            params: 'a,b',
-            tests: [
-                'false, true',
-                'false, false',
-                'true, true',
-                'true, false',
-            ],
-            correctTests: [
-                'true',
-                'false',
-                'true',
-                'true',
-            ]
-        },
-        {
-            name:"Make a bitwise XOR function",
-            params: 'a,b',
-            tests: [
-                '9, 6',
-                '5, 7',
-                '8, 9',
-                '2, 6',
-            ],
-            correctTests: [
-                '15',
-                '2',
-                '1',
-                '4',
-            ]
-        },
-        {
-            name:"Create a function that sums every element on params.",
-            params: '...nums',
-            tests: [
-                '9, 6, 6',
-                '50, 72, 10',
-                '1, 80',
-                '2, 34',
-            ],
-            correctTests: [
-                '21',
-                '132',
-                '81',
-                '36',
-            ]
-        },
-        {
-            name:"Create a function that generates a list of the even numbers with a maximum.",
-            params: 'max',
-            tests: [
-                '10',
-                '4',
-                '8',
-                '5',
-            ],
-            correctTests: [
-                '2,4,8,10',
-                '2,4',
-                '2,4,8',
-                '2,4',
-            ]
-        },
-        {
-            name:"Create a function that filters out negative numbers.",
-            params: '...numbers',
-            tests: [
-                '10, -5, 5, 7',
-                '90, 10, -24, 234',
-                '123, -432, 567, -890',
-                '5',
-            ],
-            correctTests: [
-                '10, 5, 7',
-                '90, 10, 234',
-                '123, 567',
-                '5',
-            ]
-        },
-        {
-            name:"Remove the spaces, commas and '-' found in a string.",
-            params: 'string',
-            tests: [
-                '"The quick-brown, fox"',
-                '"Jumps quickly,tnt"',
-                '"This_String_Should_Be_The_Same"',
-                '"Potatoes, chips, marshmallows."',
-            ],
-            correctTests: [
-                '"Thequickbrownfox"',
-                '"Jumpsquicklytnt"',
-                '"This_String_Should_Be_The_Same"',
-                '"Potatoeschipmarshmallows."',
-            ]
-        },
-        {
-            name:"{HARD} Return the number of vowels on string.",
-            params: 'string',
-            tests: [
-                '"The quick-brown, fox"',
-                '"Jumps quickly,tnt"',
-                '"How many?"',
-                '"Potatoes, chips, marshmallows."',
-            ],
-            correctTests: [
-                '5',
-                '3',
-                '2',
-                '8',
-            ]
-        },
-    ])
+    
 
 
     let level = ref(parseInt(localStorage.getItem('level')) || 0);
@@ -152,14 +23,17 @@ code.value = defaultCode;
     function onChange() {
         let stdouts = [];
         let passedTests = [];
-        let correct = levels.value[level.value]?.correctTests;
+        let correct = JSON.parse(JSON.stringify(levels.value[level.value]?.correctTests))
         levels.value[level.value]?.tests.forEach((t, i) => {
-            let fn = `\nsolution(${t});`
-            let r = eval(code.value + fn);
-            if(r.toString() == correct[i]) {
-                passedTests.push(r);
+            let fn = `solution(${t});`
+            let userFunction = Function(code.value + `return ${fn}`);
+            let userOutput = userFunction();
+            let isCorrect = JSON.stringify(userOutput) === JSON.stringify(correct[i]);
+            if(isCorrect) {
+                passedTests.push(userOutput);
             }
-            stdouts.push(r + `, Expected: ${correct[i]} ${r.toString() === correct[i] ? '✓' : '⮾'}`);
+            console.log(userOutput == correct[i])
+            stdouts.push(userOutput + `, Expected: ${correct[i]} ${isCorrect ? '✓' : '⮾'}`);
         })
         if(passedTests.length == stdouts.length) {
             level.value = level.value + 1;
