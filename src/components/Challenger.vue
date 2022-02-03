@@ -1,5 +1,4 @@
 <script setup>
-    import Nav from './Nav.vue';
     import {ref} from 'vue';
     import MonacoEditor from 'vue-monaco-cdn'
     import {levels} from '../utils/challenges'
@@ -57,7 +56,6 @@
 </script>
 
 <template>
-    <Nav></Nav>
     <h3>Level: {{level}}, {{levels[level]?.name || 'You won!'}}</h3>
     <MonacoEditor 
         class="editor" 

@@ -20,12 +20,12 @@ nav {
 .links {
     display: flex;
     align-items: center;
+    margin-right: 30px;
     justify-content: center;
 }
 
 .links a {
     text-decoration: none;
-    margin: 10px;
     color: #333;
     background: linear-gradient(90deg, #1a8, #faa);
     background-size: 0 5px;
