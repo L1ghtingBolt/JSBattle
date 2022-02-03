@@ -114,7 +114,23 @@ export let levels = ref([
         ]
     },
     {
-        name:"{HARD} Return the number of vowels on string.",
+        name:"Return the number of vowels on string.",
+        params: 'string',
+        tests: [
+            '"The quick-brown, fox"',
+            '"Jumps quickly,tnt"',
+            '"How many?"',
+            '"Potatoes, chips, marshmallows."',
+        ],
+        correctTests: [
+            5,
+            3,
+            2,
+            8,
+        ]
+    },
+    {
+        name:"Return the number of repeated characters on a string",
         params: 'string',
         tests: [
             '"The quick-brown, fox"',

@@ -3,22 +3,19 @@
     import {ref} from 'vue';
     import MonacoEditor from 'vue-monaco-cdn'
     import {levels} from '../utils/challenges'
-let defaultCode = `function solution(a,b) {
+    let defaultCode = `function solution(a,b) {
     return 
 }`
     
     let code = ref(defaultCode);
 
-    
-
-
     let level = ref(parseInt(localStorage.getItem('level')) || 0);
     let tests = ref([]);
 
-defaultCode = `function solution(${levels.value[level.value]?.params}){
+    defaultCode = `function solution(${levels.value[level.value]?.params}){
     return 
 }`;
-code.value = defaultCode;
+    code.value = localStorage.getItem('code') || defaultCode;
 
     function onChange() {
         let stdouts = [];
@@ -53,6 +50,10 @@ code.value = defaultCode;
             code.value = defaultCode;
         }
     }
+
+    function saveCode() {
+        localStorage.setItem('code', code.value);
+    }
 </script>
 
 <template>
@@ -76,6 +77,7 @@ code.value = defaultCode;
                 enabled: false,
             }
         }"
+        @update:modelValue="saveCode();"
     />
     <button @click="onChange">Run tests</button>
     <div id="outConsole">
